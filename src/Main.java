@@ -12,24 +12,30 @@ public class Main {
     {
     	
 		System.out.println("Running ProcessBuilder\n\n");
-		
+		String currentDir = System.getProperty("user.dir");
+        System.out.println("Current dir using System:" +currentDir);
+        
 		String program = "";
 		boolean blockingCall = false;
 		
 		if (args.length >= 1)
 		{
+			System.out.print("Running in ");
 			if (args[0].endsWith("&"))
 			{
+				System.out.println("Blocking mode");
 				program=args[0].substring(0, args[0].length()-1);
 				blockingCall = true;
 			}
 			else
 			{
+				System.out.println("Non-Blocking mode");
 				program=args[0];				
 			}
 		}
 				
     	try {
+            System.out.println("Running ProcessBuilder:");
 			ProcessBuilder processBuilder = new ProcessBuilder(program);
 			
 			
