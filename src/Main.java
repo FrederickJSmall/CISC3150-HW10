@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.IOException;
 
 /*
@@ -5,7 +6,6 @@ import java.io.IOException;
  * CISC 3150
  *  
  */
-
 
 public class Main {
     public static void main(String[] args)
@@ -16,9 +16,10 @@ public class Main {
         System.out.println("Current dir using System:" +currentDir);
         
 		String program = "";
+		String file = "";
 		boolean blockingCall = false;
 		
-		if (args.length >= 1)
+		if (args.length >= 1 && args.length <=3)
 		{
 			System.out.print("Running in ");
 			if (args[0].endsWith("&"))
@@ -30,16 +31,31 @@ public class Main {
 			else
 			{
 				System.out.println("Non-Blocking mode");
-				program=args[0];				
+				program=args[0];
 			}
+			if (!args[1].equals(">"))
+			{
+				System.out.println("Invalid operation supplied");
+				System.exit(-1);
+			}
+			file = args[2];
 		}
-				
+		else
+		{
+			System.out.println("Invalid number of options supplied");
+			System.exit(-1);
+		}	
+		
     	try {
             System.out.println("Running ProcessBuilder:");
 			ProcessBuilder processBuilder = new ProcessBuilder(program);
 			
 			
 			try {
+				System.out.println("Writing output to following file:" + currentDir + "\\" + file);
+				File output = new File(currentDir + "\\" + file);
+				processBuilder.redirectOutput(output);
+
 				Process process = processBuilder.start();
 				if (blockingCall)
 				{
@@ -53,7 +69,7 @@ public class Main {
     	}
     	finally
     	{
-    		System.out.println("Process terminated");
+    		System.out.println("Process completed successfully");
     	}
     }
 }
