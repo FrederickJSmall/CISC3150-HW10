@@ -1,0 +1,2 @@
+D:\Projects\SayHello\SayHello\bin\Release\SayHello.exe
+D:\Projects\SayHello\SayHello\bin\Release\SayHello.exe.config
